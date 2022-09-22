@@ -1,32 +1,51 @@
 #include "main.h"
-#include <stdio.h>
+
 /**
-* print_number - prints a number
-* @n: Input number
-*/
+
+ *print_number - prints an integer.
+
+ *only using the putchar function.
+
+ *noarrays and pointers.
+
+ *@n: integer to be printed.
+
+ *
+
+ *Return: void.
+
+ */
+
 void print_number(int n)
+
 {
-int res, temp, expo;
-expo = 1;
-/Check negatives/
-if (n >= 0)
-res = n * -1;
-else
-{
-res = n;
-_putchar('_');
-}
-/Initialize exponent variable/
-temp = res;
-while (temp <= -10)
-{
-expo *= 10;
-temp /= 10;
-}
-/*Main */
-while (expo >= 1)
-{
-_putchar(((res / expo) % 10) * -1 + '0');
-expo /= 10;
-}
+
+	unsigned int num;
+
+/*check if number is negative*/
+
+	num = n;
+
+	if (n < 0)
+
+	{
+
+		_putchar(45);
+
+		num = -n;
+
+	}
+
+/* print number by recursion*/
+
+	if (num / 10)
+
+	{
+
+		print_number(num / 10);
+
+	}
+
+	_putchar((num % 10) + '0');
+
 }
