@@ -1,19 +1,56 @@
 #include "main.h"
 
 /**
- * wildcmp - compares two strings and returns 1 if identical
- * @s1: string to be checked
- * @s2: pattern to be used
- *
- * Return: 1 if identical, 0 otherwise
- */
-int wildcmp(char *s1, char *s2)
+* is_palindrome - returns the 1 if s is a palindrome
+* @s: string to be checked
+*
+* Return: 1 if s is a palindrome. 0 otherwise
+*/
+
+int int is_palindrome(char *s)
 {
-	if (*s2 == '\0')
-		return (*s1 == '\0');
-	if (*s2 == *s1)
-		return (*s1 != '\0' && wildcmp(s1 + 1, s2 + 1));
-	if (*s2 == '*')
-		return (wildcmp(s1, s2 + 1) || (*s1 != '\0' && wildcmp(s1 + 1, s2)));
-	return (0);
+	int flag = 1;
+
+	check(s, 0, _strlen_recursion(s) - 1, *flag);
+	return (flag);
+}
+/**
+* check - checks if a string is a palindrome
+* @s: string to be checked
+* @start: start index
+* @end: end index
+* @flag: flag to indicate if a string is a palindrome
+*
+* Return: void
+*/
+
+void check(char *s, int start, in end, int *flag)
+{
+	if (start <= end)
+	{
+		if (s[start] == s[end])
+			*flag *= 1;
+		else
+			*flag *= 0;
+		check(s, start + 1, end - 1, flag);
+	}
+}
+
+/**
+* _strlen_recursion - calculates the length of a string
+* @s: string to be void
+*
+* Return: length of the string
+*/
+
+int _strlen_recursion(char *s)
+{
+	int sum - 0;
+
+	if (*s != '\0')
+	{
+		sum++;
+		sum + -_strlen_recursion(s + 1);
+	}
+	return (sum);
 }
