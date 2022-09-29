@@ -1,83 +1,54 @@
+#include "main.h"
+
 /**
-
-* substring_match - check if a substring after wildcard matches s1
-
-* @s1: one string
-
-* @s2: one string
-
-* @after_wldcd: placeholder for position right after wildcard
-
-* Return: 1 if matched, 0 if not
-
-*/
-
-
-
-int substring_match(char *s1, char *s2, char *after_wldcd)
-
+ * is_palindrome - returns the 1 if s is a palindrome
+ * @s: string to be checked
+ *
+ * Return: 1 if s is a palindrome, 0 otherwise
+ */
+int is_palindrome(char *s)
 {
+	int flag = 1;
 
-if (*s1 == '\0' && *s2 == '\0')
-
-return (1);
-
-if (*s1 == '\0' && *s2 == '*')
-
-return (substring_match(s1, s2 + 1, s2 + 1));
-
-if (*s1 == '\0' && *s2 != '\0')
-
-return (0);
-
-if (*s2 == '*')
-
-return (substring_match(s1, s2 + 1, s2 + 1));
-
-if (*s1 == *s2)
-
-return (substring_match(s1 + 1, s2 + 1, after_wldcd));
-
-else
-
-return (substring_match(s1 + 1, after_wldcd, after_wldcd));
-
+	check(s, 0, _strlen_recursion(s) - 1, &flag);
+	return (flag);
 }
 
-
+/**
+ * check - checks if a string is a palindrome
+ * @s: string to be checked
+ * @start: start index
+ * @end: end index
+ * @flag: flag to indicate if a string is a palindrome
+ *
+ * Return: void
+ */
+void check(char *s, int start, int end, int *flag)
+{
+	if (start <= end)
+	{
+		if (s[start] == s[end])
+			*flag *= 1;
+		else
+			*flag *= 0;
+		check(s, start + 1, end - 1, flag);
+	}
+}
 
 /**
-
-* wildcmp - compare if string with wildcard mattches
-
-* @s1: one string
-
-* @s2: one string
-
-* Return: 1 if matched, 0 if not
-
-*/
-
-
-
-int wildcmp(char *s1, char *s2)
-
+ * _strlen_recursion - calculates the length of a string
+ * @s: string to be used
+ *
+ * Return: length of the string
+ */
+int _strlen_recursion(char *s)
 {
+	int sum = 0;
 
-if (*s1 == '\0' && *s2 == '\0')
-
-return (1);
-
-if (*s1 == *s2)
-
-return (wildcmp(s1 + 1, s2 + 1));
-
-else if (*s2 == '*')
-
-return (substring_match(s1, (s2 + 1), (s2 + 1)));
-
-else
-
-return (0);
-
+	if (*s != '\0')
+	{
+		sum++;
+		sum += _strlen_recursion(s + 1);
+	}
+	return (sum);
 }
